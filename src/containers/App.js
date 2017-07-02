@@ -66,8 +66,6 @@ class App extends Component {
 
   render() {
     return (
-
-      <Router>
           <div className="App">
             <Header chapters={ this.state.chapters } />
             <Nav chapters={ this.state.chapters } />
@@ -77,7 +75,6 @@ class App extends Component {
               <Route component={ this.HomeComponent } />
             </Switch>
           </div>
-      </Router>
     );
   }
 }
