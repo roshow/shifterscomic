@@ -1,0 +1,13 @@
+.Nav {
+  background: #000000;
+  color: "yellow";
+  font-family: "'Trade Winds', sans-serif";
+}
+
+.Nav section {
+  max-width: 772px;
+  padding: 20px;
+  margin: auto;
+  text-align: left;
+  display: flex;
+}
