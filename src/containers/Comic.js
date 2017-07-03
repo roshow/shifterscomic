@@ -35,8 +35,6 @@ class Comic extends React.Component {
       nextChapter: chapters[chapterId+1],
       previousChapter: chapters[chapterId-1]
     }))
-    console.log('componentDidMount')
-    scrollToElement("#page3")
   }
 
   getImages (chapterId) {
@@ -63,7 +61,6 @@ class Comic extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('componentWillReceiveProps')
     const chapterId = parseInt(nextProps.match.params.chapterId, 10)
     let state = {
       chapter: nextProps.chapters[chapterId],
@@ -87,14 +84,8 @@ class Comic extends React.Component {
   }
 
   componentWillUpdate () {
-    console.log('componentWillUpdate')
     // Scroll to top when loading a new comic
     window.scrollTo(0,0)
-  }
-
-  componentDidUpdate () {
-    // console.log('componentDidUpdate')
-    // scrollToElement("#page3")
   }
 
   render () {

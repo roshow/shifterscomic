@@ -16,6 +16,7 @@
     "react-scroll-to-component": "^1.0.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0",
     "scroll-to-element": "^2.0.0"
   },
   "devDependencies": {
