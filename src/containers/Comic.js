@@ -18,6 +18,7 @@ class Comic extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    // Without the conditional this becomes an infinite loop, LOL SMH
     const newChapterId = nextProps.match.params.chapterId
     if (newChapterId !== this.props.match.params.chapterId) {
       this.props.getPages(newChapterId)
