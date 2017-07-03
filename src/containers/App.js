@@ -4,27 +4,10 @@ import { Route, Switch } from 'react-router-dom'
 import Comic from './Comic'
 import Home from './../components/Home'
 import Nav from './../components/Nav'
-import { getChapters } from './../actions/Actions'
+import Header from './Header'
 
 import './App.css';
 
-class Header extends Component {
-  componentDidMount () {
-      this.props.getChapters()
-  }
-  render () {
-    return (
-      <div className="App-header tradeWinds">
-        <h1>Shifters</h1>
-        <h3>by Bruno Roncada</h3>
-      </div>
-    )
-  }
-}
-
-const HeaderContainer = connect(null, {
-  getChapters
-})(Header);
 
 class App extends Component {
 
@@ -34,24 +17,18 @@ class App extends Component {
     this.state = {
       chapters: {}
     }
-    
-    this.ComicComponent = this.ComicComponent.bind(this)
 
   }
-
-  ComicComponent (props) {
-    return <Comic chapters={ this.props.chapters } { ...props } />
-  }
-
+  
   render() {
     return (
       <div className="App">
-        <HeaderContainer />
-        <Nav chapters={ this.state.chapters } />
+        <Header />
+        <Nav />
         <Switch>
           <Route exact path="/" component={ Home } />
-          <Route path="/chapter/:chapterId" component={ this.ComicComponent } />
-          <Route component={ this.HomeComponent } />
+          <Route path="/chapter/:chapterId" component={ Comic } />
+          <Route component={ Home } />
         </Switch>
       </div>
     );

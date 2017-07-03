@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import "./Nav.css"
@@ -104,4 +105,10 @@ const Nav = props => (
   </Paper>
 )
 
-export default Nav
+const mapStateToProps = (state) => {
+  return {
+    chapters: state.chapters
+  }
+}
+
+export default connect(mapStateToProps)(Nav)
