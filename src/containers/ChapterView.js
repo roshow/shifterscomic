@@ -1,19 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
 import IconNavigationArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import IconNavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import { getPages } from './../actions/Actions'
 
 import ComicPages from './../components/ComicPages'
+import PaperNav from './../components/PaperNav'
 
-import './Comic.css'
-
-
-class Comic extends React.Component {
+class ChapterView extends React.Component {
 
   componentDidMount () {
+    console.log(this.props.match.params)
     this.props.getPages(this.props.match.params.chapterId)
   }
 
@@ -38,9 +37,14 @@ class Comic extends React.Component {
     const previousChapter = this.props.chapters[chapterId-1]
 
     return (
-      <div className="Comic">
+      <div className="ChapterView" style={{ maxWidth: '772px', margin: 'auto', textAlign: 'left' }}>
+        
+        <FlatButton
+          label="Go to Page View"
+          containerElement={<Link to={`/chapter/${ chapterId }/page/0`} />}
+        />
 
-        <Paper zDepth={2} style={{margin:"10px auto", padding: "10px 0", maxWidth: "772px" }} className="Comic-nav">
+        <PaperNav>
           {
             previousChapter && <Link to={ `/chapter/${ previousChapter.number }` }><IconNavigationArrowBack /></Link>
           }
@@ -50,7 +54,7 @@ class Comic extends React.Component {
           {
             nextChapter && <Link to={ `/chapter/${ nextChapter.number }` }><IconNavigationArrowForward /></Link>
           }
-        </Paper>
+        </PaperNav>
         
         <ComicPages
           pages={ this.props.pages }
@@ -58,11 +62,11 @@ class Comic extends React.Component {
         />
         
         {
-          nextChapter && <Paper zDepth={2} style={{margin:"10px auto", padding: "10px 0", maxWidth: "772px" }} className="Comic-nav">
+          nextChapter && <PaperNav>
             <span className="tradeWinds" id="nextChapter">Next Chapter</span>
             &nbsp;
             <Link to={ `/chapter/${ nextChapter.number }` }><IconNavigationArrowForward /></Link>
-          </Paper>
+          </PaperNav>
         }
         
       </div>
@@ -79,4 +83,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   getPages
-})(Comic)
+})(ChapterView)

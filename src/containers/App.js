@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom'
-import Comic from './Comic'
+import ChapterView from './ChapterView'
+import PageView from './PageView'
 import Home from './Home'
 import Nav from './Nav'
 import Header from './Header'
+import WorkInProgress from './WorkInProgress'
 
 import './App.css';
 
@@ -15,7 +16,9 @@ const App = props => (
     <Nav />
     <Switch>
       <Route exact path="/" component={ Home } />
-      <Route path="/chapter/:chapterId" component={ Comic } />
+      <Route path="/chapter/:chapterId/page/workinprogress" component={ WorkInProgress } />
+      <Route path="/chapter/:chapterId/page/:pageId" component={ PageView } />
+      <Route path="/chapter/:chapterId" component={ ChapterView } />
       <Route component={ Home } />
     </Switch>
   </div>
