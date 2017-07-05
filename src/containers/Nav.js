@@ -58,7 +58,7 @@ class ChaptersButton extends React.Component {
                 <MenuItem
                   key={ chapters[key].number }
                   primaryText={ `${ chapters[key].number }: ${ chapters[key].title}` }
-                  containerElement={<Link to={`/chapter/${ chapters[key].number }`} />}
+                  containerElement={<Link to={`/chapter/${ chapters[key].number }/page/0`} />}
                 />
               ))
             }

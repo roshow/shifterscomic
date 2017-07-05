@@ -11,19 +11,6 @@ import PaperNav from './../components/PaperNav'
 
 class ChapterView extends React.Component {
 
-  componentDidMount () {
-    console.log(this.props.match.params)
-    this.props.getPages(this.props.match.params.chapterId)
-  }
-
-  componentWillReceiveProps (nextProps) {
-    // Without the conditional this becomes an infinite loop, LOL SMH
-    const newChapterId = nextProps.match.params.chapterId
-    if (newChapterId !== this.props.match.params.chapterId) {
-      this.props.getPages(newChapterId)
-    }
-  }
-
   componentWillUpdate () {
     // Scroll to top when loading a new comic
     window.scrollTo(0,0)
@@ -57,17 +44,21 @@ class ChapterView extends React.Component {
         </PaperNav>
         
         <ComicPages
-          pages={ this.props.pages }
+          pages={ chapter.pages }
           toBeContinued={ !nextChapter }
         />
         
-        {
-          nextChapter && <PaperNav>
-            <span className="tradeWinds" id="nextChapter">Next Chapter</span>
-            &nbsp;
-            <Link to={ `/chapter/${ nextChapter.number }` }><IconNavigationArrowForward /></Link>
-          </PaperNav>
-        }
+        <PaperNav>
+          {
+            previousChapter && <Link to={ `/chapter/${ previousChapter.number }` }><IconNavigationArrowBack /></Link>
+          }
+          &nbsp;
+          <span className="tradeWinds">Chapter { chapterId }: { chapter.title }</span>
+          &nbsp;
+          {
+            nextChapter && <Link to={ `/chapter/${ nextChapter.number }` }><IconNavigationArrowForward /></Link>
+          }
+        </PaperNav>
         
       </div>
     )
@@ -76,8 +67,7 @@ class ChapterView extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    chapters: state.chapters,
-    pages: state.pages
+    chapters: state.chapters
   }
 }
 

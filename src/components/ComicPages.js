@@ -2,7 +2,7 @@ import React from 'react'
 import LazyLoad from 'react-lazyload';
 import PaperImg from './PaperImg';
 
-const ComicPages = ({ pages, toBeContinued, height=1000 }) => (
+const ComicPages = ({ pages=[], toBeContinued, height=1000 }) => (
   <section className="comic">
     {
       pages.map((page,i) => (
