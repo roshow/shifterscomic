@@ -32,7 +32,7 @@ const Home = ({ chapters }) => (
             <GridTile
               key={chapters[key].number}
               title={` `}
-              actionIcon={<Link to={`/chapter/${ chapters[key].number }`}><IconContentForward color={ yellow500 }/>&nbsp;&nbsp;</Link>}
+              actionIcon={<Link to={`/chapter/${ chapters[key].number }/page/0`}><IconContentForward color={ yellow500 }/>&nbsp;&nbsp;</Link>}
             >
               <img src={ chapters[key].img } alt="" />
             </GridTile>
