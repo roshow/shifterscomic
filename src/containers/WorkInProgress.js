@@ -17,9 +17,14 @@ const WorkInProgress = props => {
     <div className="PageView" style={{ maxWidth: '772px', margin: 'auto', textAlign: 'left' }}>
       
       <FlatButton
-        label="Go to Chapter View"
-        containerElement={<Link to={`/chapter/${ chapterId }`} />}
+        label="First Page"
+        containerElement={<Link to="/chapter/1/page/1" />}
       />
+
+      <FlatButton
+        label="Latest Page"
+        containerElement={<Link to={`/chapter/${ chapterId }/page/lastpage`} />}
+      />  
 
       <PaperNav>
         <Link to={`/chapter/${ chapterId }/page/lastpage`} ><IconNavigationArrowBack /></Link>

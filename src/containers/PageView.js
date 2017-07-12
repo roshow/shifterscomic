@@ -24,7 +24,7 @@ class PagView extends React.Component {
     const chapter = this.props.chapters[chapterId] || { pages: [] }
     const pageId = this.props.match.params.pageId === 'lastpage' ? chapter.pages.length - 1 : parseInt(this.props.match.params.pageId, 10)
     const imgUrl = chapter.pages[pageId] 
-
+    const lastChapterId = Object.keys(this.props.chapters).slice(-1)
 
     // Default nextPageUrl it the WorkInProgress component, so that it will always be the last destination if no other page is available.
     // This also means there will always be a "nextPage" arrow in this component
@@ -50,15 +50,20 @@ class PagView extends React.Component {
       <div className="PageView" style={{ maxWidth: '772px', margin: 'auto', textAlign: 'left' }}>
         
         <div style={{ display: 'flex'}}>
-        <FlatButton
-          label="Go to Chapter View"
-          containerElement={<Link to={`/chapter/${ chapterId }`} />}
-        />
+          <PagesButton
+            chapterId={ chapterId }
+            pages={ chapter.pages }
+          />
 
-        <PagesButton
-          chapterId={ chapterId }
-          pages={ chapter.pages }
-        />
+          <FlatButton
+            label="First Page"
+            containerElement={<Link to="/chapter/1/page/1" />}
+          />
+
+          <FlatButton
+            label="Latest Page"
+            containerElement={<Link to={`/chapter/${ lastChapterId }/page/lastpage`} />}
+          />        
         </div>
         
         <PaperNav>
