@@ -12,7 +12,7 @@ const muiStyles = {
 }
 
 const PaperNav = props => (
-  <Paper zDepth={2} style={ muiStyles.paper } >
+  <Paper zDepth={2} style={ muiStyles.paper } className={ props.className }>
     { props.children }
   </Paper>
 )

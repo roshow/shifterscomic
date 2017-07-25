@@ -90,11 +90,6 @@ const Nav = props => (
     style={ muiStyles.paper }
   >
     <section>
-      <FlatButton
-        label="Home"
-        style={ muiStyles.flatButton }
-        containerElement={<Link to="/" />}
-      />
       <ChaptersButton chapters={ props.chapters } />
       <FlatButton
         label="Follow on Facebook"

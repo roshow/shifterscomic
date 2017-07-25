@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import IconNavigationArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import IconNavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
@@ -10,6 +9,8 @@ import { getPages } from './../actions/Actions'
 import PaperImg from './../components/PaperImg'
 import PaperNav from './../components/PaperNav'
 import PagesButton from './../components/PagesButton'
+
+import './PageView.css';
 
 
 class PagView extends React.Component {
@@ -66,23 +67,28 @@ class PagView extends React.Component {
           />        
         </div>
         
-        <PaperNav>
-          {
-            previousPageUrl && <Link to={ previousPageUrl }><IconNavigationArrowBack /></Link>
-          }
-          <span className="tradeWinds">Chapter { chapterId }: { chapter.title } , { pageId === 0 ? 'Cover' : `Page ${pageId}` }</span>
-          <Link to={ nextPageUrl }><IconNavigationArrowForward /></Link>
+        <PaperNav className="PagView-Nav">
+          
+          <span className="navCell">{ previousPageUrl && <Link className="navCell" to={ previousPageUrl }><IconNavigationArrowBack /></Link> }</span>
+          
+          <span className="tradeWinds navCell">Chapter { chapterId }, { pageId === 0 ? 'Cover' : `Page ${pageId}` }</span>
+          
+          <Link className="navCell" to={ nextPageUrl }><IconNavigationArrowForward /></Link>
+
         </PaperNav>
 
         <Link to={ nextPageUrl }><PaperImg src={ imgUrl } /></Link>
 
-        <PaperNav>
-          {
-            previousPageUrl && <Link to={ previousPageUrl }><IconNavigationArrowBack /></Link>
-          }
-          <span className="tradeWinds">Chapter { chapterId }: { chapter.title } , { pageId === 0 ? 'Cover' : `Page ${pageId}` }</span>
-          <Link to={ nextPageUrl }><IconNavigationArrowForward /></Link>
+        <PaperNav className="PagView-Nav">
+          
+          <span className="navCell">{ previousPageUrl && <Link className="navCell" to={ previousPageUrl }><IconNavigationArrowBack /></Link> }</span>
+          
+          <span className="tradeWinds navCell">Chapter { chapterId }, { pageId === 0 ? 'Cover' : `Page ${pageId}` }</span>
+          
+          <Link className="navCell" to={ nextPageUrl }><IconNavigationArrowForward /></Link>
+          
         </PaperNav>
+        
       </div>
     )
   }
