@@ -54,9 +54,9 @@ class ChaptersButton extends React.Component {
         >
           <Menu>
             {
-              Object.keys(chapters).map( key => (
+              Object.keys(chapters).map( (key,i) => (
                 <MenuItem
-                  key={ chapters[key].number }
+                  key={ i }
                   primaryText={ `${ chapters[key].number }: ${ chapters[key].title}` }
                   containerElement={<Link to={`/chapter/${ chapters[key].number }/page/0`} />}
                 />
@@ -73,7 +73,7 @@ class ChaptersButton extends React.Component {
 const muiStyles = {
   paper: {
     backgroundColor: "#00000",
-    marginBottom: "10px"
+    marginBottom: "5px"
   },
   flatButton: {
     color: "yellow",

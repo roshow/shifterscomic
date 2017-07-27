@@ -21,6 +21,7 @@ export const getChapters = () => dispatch => {
             }, {})
 
             const chapters = chaptersResponse.items.reduce( (obj, item) => {
+              // filter pages by chapter number then create an array from the assetMap
               const pages = pagesResponse.items.filter(page => page.fields.chapter ===  item.fields.number).map(item => pagesAssetMap[item.fields.image.sys.id])
                obj[item.fields.number] = {
                 ...item.fields,

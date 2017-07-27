@@ -1,6 +1,10 @@
 
-
-const chapters = (state={}, { type, payload }={} ) => {
+const initState = {
+  "1": {
+    pages: []
+  }
+}
+const chapters = (state=initState, { type, payload }={} ) => {
   switch (type) {
 
     case 'GET_CHAPTERS_RECEIVED':
