@@ -28,9 +28,9 @@ const Home = ({ chapters }) => (
         style={muiStyles.gridList}
       >
         {
-          Object.keys(chapters).map( key => (
+          Object.keys(chapters).map( (key, i) => (
             <GridTile
-              key={chapters[key].number}
+              key={i}
               title={` `}
               actionIcon={<Link to={`/chapter/${ chapters[key].number }/page/0`}><IconContentForward color={ yellow500 }/>&nbsp;&nbsp;</Link>}
             >

@@ -43,7 +43,7 @@ class ChaptersButton extends React.Component {
         <FlatButton
           onTouchTap={this.handleTouchTap}
           label="Chapters"
-          style={{color:"yellow", fontFamily: "'Trade Winds', sans-serif"}}
+          style={{color:"yellow"}}
         />
         <Popover
           open={this.state.open}
@@ -77,7 +77,7 @@ const muiStyles = {
   },
   flatButton: {
     color: "yellow",
-    fontFamily: "'Trade Winds', sans-serif"
+    // fontFamily: "'Trade Winds', sans-serif"
   }
 }
 
@@ -92,6 +92,16 @@ const Nav = props => (
     <section>
       <ChaptersButton chapters={ props.chapters } />
       <FlatButton
+        label="Beginning"
+        style={ muiStyles.flatButton }
+        containerElement={<Link to="/chapter/1/page/1" />}
+      />
+      <FlatButton
+        label="Latest Update"
+        style={ muiStyles.flatButton }
+        containerElement={<Link to={`/chapter/${ props.lastChapter }/page/lastpage`} />}
+      />  
+      <FlatButton
         label="Follow on Facebook"
         style={ muiStyles.flatButton }
         containerElement={ <LinkToFacebook /> }
@@ -102,7 +112,8 @@ const Nav = props => (
 
 const mapStateToProps = (state) => {
   return {
-    chapters: state.chapters
+    chapters: state.chapters,
+    lastChapter: state.lastChapter
   }
 }
 

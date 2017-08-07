@@ -1,23 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import FlatButton from 'material-ui/FlatButton';
+// import FlatButton from 'material-ui/FlatButton';
 import IconNavigationArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import IconNavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import { getPages } from './../actions/Actions'
+import makePageUrl from './../utils/makePageUrl'
 
 import PaperImg from './../components/PaperImg'
 import PaperNav from './../components/PaperNav'
 import PagesButton from './../components/PagesButton'
+import PagesDropDown from './../components/PagesDropDown'
 
 import './PageView.css';
 
-const PageNav = ({ chapterId, pageId, previousPageUrl, nextPageUrl }) => (
+const PageNav = ({ chapterId, pageId, previousPageUrl, nextPageUrl, pages }) => (
   <PaperNav className="PagView-Nav">
             
     <span className="navCell">{ previousPageUrl && <Link className="navCell" to={ previousPageUrl }><IconNavigationArrowBack /></Link> }</span>
 
-    <span className="tradeWinds navCell">Chapter { chapterId }, { pageId === 0 ? 'Cover' : `Page ${pageId}` }</span>
+    <span className="navCell">Chapter { chapterId }, <PagesDropDown
+      chapterId={ chapterId }
+      pages={ pages }
+      currentPage={ pageId }
+      style={ {height: '22px'}}
+      iconStyle={ { top: '-14px'} }
+      labelStyle={{ height: 'auto', lineHeight: 'normal' }}
+    /> </span>
 
     <Link className="navCell" to={ nextPageUrl }><IconNavigationArrowForward /></Link>
 
@@ -40,48 +49,33 @@ class PagView extends React.Component {
 
     // Default nextPageUrl it the WorkInProgress component, so that it will always be the last destination if no other page is available.
     // This also means there will always be a "nextPage" arrow in this component
-    let nextPageUrl = `/chapter/${ chapterId }/page/workinprogress`
+    let nextPageUrl = makePageUrl(chapterId, 'workinprogress')
 
     if ( pageId + 1 < chapter.pages.length ) {
-      nextPageUrl = `/chapter/${ chapterId }/page/${ pageId + 1 }`
+      nextPageUrl = makePageUrl(chapterId, pageId + 1)
     }
     else if ( this.props.chapters[chapterId+1] ) {
-      nextPageUrl = `/chapter/${ chapterId + 1 }/page/0` 
+      nextPageUrl = makePageUrl(chapterId + 1, 0)
     }
 
     let previousPageUrl = false
 
     if (pageId - 1 >= 0) {
-      previousPageUrl = `/chapter/${ chapterId }/page/${ pageId - 1 }`
+      previousPageUrl = makePageUrl(chapterId, pageId - 1)
     }
     else if (chapterId - 1 > 0) {
-      previousPageUrl = `/chapter/${ chapterId - 1 }/page/lastpage`  
+      previousPageUrl = makePageUrl(chapterId - 1, 'lastpage')
     }
 
     return (
-      <div className="PageView" style={{ maxWidth: '772px', margin: 'auto', textAlign: 'left' }}>
-        
-        <section style={{ display: 'flex'}}>
-          <PagesButton
-            chapterId={ chapterId }
-            pages={ chapter.pages }
-          />
-          <FlatButton
-            label="First Page"
-            containerElement={<Link to="/chapter/1/page/1" />}
-          />
-
-          <FlatButton
-            label="Latest Page"
-            containerElement={<Link to={`/chapter/${ this.props.lastChapter }/page/lastpage`} />}
-          />      
-        </section>
+      <div className="PageView" style={{ maxWidth: '772px', margin: 'auto', padding: '0 10px' }}>
         
         <PageNav
           chapterId={ chapterId }
           pageId={ pageId }
           nextPageUrl={ nextPageUrl }
           previousPageUrl={ previousPageUrl }
+          pages={ chapter.pages }
         />
 
         <Link to={ nextPageUrl }><PaperImg src={ imgUrl } /></Link>
@@ -91,6 +85,7 @@ class PagView extends React.Component {
           pageId={ pageId }
           nextPageUrl={ nextPageUrl }
           previousPageUrl={ previousPageUrl }
+          pages={ chapter.pages }
         />
         
       </div>

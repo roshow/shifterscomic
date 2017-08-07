@@ -38,7 +38,7 @@ class PagesButton extends React.Component {
         <FlatButton
           onTouchTap={this.handleTouchTap}
           label="Pages"
-          style={{color:"yellow", backgroundColor: "black", fontFamily: "'Trade Winds', sans-serif"}}
+          style={{color:"yellow", backgroundColor: "black"}}
         />
         <Popover
           open={this.state.open}

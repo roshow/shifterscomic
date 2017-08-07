@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "contentful": "^4.4.4",
+    "contentful": "^4.5.0",
     "material-ui": "^0.18.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -17,7 +17,8 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "scroll-to-element": "^2.0.0"
+    "scroll-to-element": "^2.0.0",
+    "stable": "^0.1.6"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",
