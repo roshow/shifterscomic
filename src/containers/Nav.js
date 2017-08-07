@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import "./Nav.css"
@@ -53,11 +54,11 @@ class ChaptersButton extends React.Component {
         >
           <Menu>
             {
-              Object.keys(chapters).map( key => (
+              Object.keys(chapters).map( (key,i) => (
                 <MenuItem
-                  key={ chapters[key].number }
+                  key={ i }
                   primaryText={ `${ chapters[key].number }: ${ chapters[key].title}` }
-                  containerElement={<Link to={`/chapter/${ chapters[key].number }`} />}
+                  containerElement={<Link to={`/chapter/${ chapters[key].number }/page/0`} />}
                 />
               ))
             }
@@ -72,7 +73,7 @@ class ChaptersButton extends React.Component {
 const muiStyles = {
   paper: {
     backgroundColor: "#00000",
-    marginBottom: "10px"
+    marginBottom: "5px"
   },
   flatButton: {
     color: "yellow",
@@ -89,11 +90,6 @@ const Nav = props => (
     style={ muiStyles.paper }
   >
     <section>
-      <FlatButton
-        label="Home"
-        style={ muiStyles.flatButton }
-        containerElement={<Link to="/" />}
-      />
       <ChaptersButton chapters={ props.chapters } />
       <FlatButton
         label="Follow on Facebook"
@@ -104,4 +100,10 @@ const Nav = props => (
   </Paper>
 )
 
-export default Nav
+const mapStateToProps = (state) => {
+  return {
+    chapters: state.chapters
+  }
+}
+
+export default connect(mapStateToProps)(Nav)

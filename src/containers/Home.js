@@ -1,8 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {GridList, GridTile} from 'material-ui/GridList';
-import IconContentForward from 'material-ui/svg-icons/content/forward';
-import { yellow500 } from 'material-ui/styles/colors';
+import {GridList, GridTile} from 'material-ui/GridList'
+import IconContentForward from 'material-ui/svg-icons/content/forward'
+import { yellow500 } from 'material-ui/styles/colors'
 
 
 const muiStyles = {
@@ -31,7 +32,7 @@ const Home = ({ chapters }) => (
             <GridTile
               key={chapters[key].number}
               title={` `}
-              actionIcon={<Link to={`/chapter/${ chapters[key].number }`}><IconContentForward color={ yellow500 }/>&nbsp;&nbsp;</Link>}
+              actionIcon={<Link to={`/chapter/${ chapters[key].number }/page/0`}><IconContentForward color={ yellow500 }/>&nbsp;&nbsp;</Link>}
             >
               <img src={ chapters[key].img } alt="" />
             </GridTile>
@@ -42,4 +43,10 @@ const Home = ({ chapters }) => (
   </section>
 )
 
-export default Home
+const mapStateToProps = (state) => {
+  return {
+    chapters: state.chapters
+  }
+}
+
+export default connect(mapStateToProps)(Home)
