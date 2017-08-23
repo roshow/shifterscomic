@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-// import FlatButton from 'material-ui/FlatButton';
 import IconNavigationArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import IconNavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import { getPages } from './../actions/Actions'
@@ -9,7 +8,6 @@ import makePageUrl from './../utils/makePageUrl'
 
 import PaperImg from './../components/PaperImg'
 import PaperNav from './../components/PaperNav'
-import PagesButton from './../components/PagesButton'
 import PagesDropDown from './../components/PagesDropDown'
 
 import './PageView.css';
@@ -23,9 +21,10 @@ const PageNav = ({ chapterId, pageId, previousPageUrl, nextPageUrl, pages }) => 
       chapterId={ chapterId }
       pages={ pages }
       currentPage={ pageId }
-      style={ {height: '22px'}}
-      iconStyle={ { top: '-14px'} }
+      style={ {height: 'auto'}}
+      iconStyle={ { top: '-14px', fill: 'black'} }
       labelStyle={{ height: 'auto', lineHeight: 'normal' }}
+
     /> </span>
 
     <Link className="navCell" to={ nextPageUrl }><IconNavigationArrowForward /></Link>

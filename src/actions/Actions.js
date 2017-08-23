@@ -1,4 +1,4 @@
-// import client from './../utils/api'
+import client from './../utils/api'
 
 export const getChapters = () => dispatch => {
 
@@ -8,28 +8,31 @@ export const getChapters = () => dispatch => {
   
   // Nest calls like a heathen. Use promises, bro!!!
 
-  return fetch('https://cdn.contentful.com/spaces/9ilzxl5twj9p/entries?access_token=51953758c1cf7b123fbb879754de626111cfcf4b45000407be02e94be1b1079d&content_type=chapter').then(res => res.json())
+  // return fetch('https://cdn.contentful.com/spaces/9ilzxl5twj9p/entries?access_token=51953758c1cf7b123fbb879754de626111cfcf4b45000407be02e94be1b1079d&content_type=chapter').then(res => res.json())
+  return client.getEntries({
+    content_type: 'chapter'
+  })
     .then(chaptersResponse => {
 
-        return fetch('https://cdn.contentful.com/spaces/9ilzxl5twj9p/entries?access_token=51953758c1cf7b123fbb879754de626111cfcf4b45000407be02e94be1b1079d&content_type=page&order=fields.page&limit=999').then(r => r.json())
+        // return fetch('https://cdn.contentful.com/spaces/9ilzxl5twj9p/entries?access_token=51953758c1cf7b123fbb879754de626111cfcf4b45000407be02e94be1b1079d&content_type=page&order=fields.page&limit=999').then(r => r.json())
+        return client.getEntries({
+          content_type: 'page',
+          order: 'fields.page',
+          limit: 999
+        }) 
           .then(pagesResponse => {
 
-            const pagesAssets = pagesResponse.includes.Asset
-        
-            const pagesAssetMap = pagesAssets.reduce((obj, asset) => {
-              obj[asset.sys.id] = asset.fields.file.url
-              return obj
-            }, {})
-
             const chapters = chaptersResponse.items.reduce( (obj, item) => {
-              // filter pages by chapter number then create an array from the assetMap
-              const pages = pagesResponse.items.filter(page => page.fields.chapter ===  item.fields.number).map(item => pagesAssetMap[item.fields.image.sys.id])
-               obj[item.fields.number] = {
+              // filter pages by chapter number then create a pages array of image urls
+              const pages = pagesResponse.items.filter(page => page.fields.chapter ===  item.fields.number).map(item => item.fields.image.fields.file.url)
+              
+              obj[item.fields.number] = {
                 ...item.fields,
                 img: pages[0],
                 pages
               }
-               return obj
+              
+              return obj
             }, {})
 
             dispatch({

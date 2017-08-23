@@ -26,7 +26,7 @@ export default class PagesDropDown extends Component {
   }
 
   render () {
-    const { chapterId, pages, ...props } = this.props 
+    const { chapterId, pages, currentPage, ...props } = this.props 
     return (
       <DropDownMenu value={this.state.value} onChange={this.handleChange} { ...props }>
         {

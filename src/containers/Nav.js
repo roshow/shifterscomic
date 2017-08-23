@@ -94,13 +94,13 @@ const Nav = props => (
       <FlatButton
         label="Beginning"
         style={ muiStyles.flatButton }
-        containerElement={<Link to="/chapter/1/page/1" />}
+        containerElement={<Link to="/chapter/1/page/0" />}
       />
       <FlatButton
         label="Latest Update"
         style={ muiStyles.flatButton }
         containerElement={<Link to={`/chapter/${ props.lastChapter }/page/lastpage`} />}
-      />  
+      />
       <FlatButton
         label="Follow on Facebook"
         style={ muiStyles.flatButton }
